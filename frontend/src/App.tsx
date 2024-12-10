@@ -2,38 +2,31 @@ import React, { useState } from "react";
 import { BacklogItem, BacklogItemType } from "./components/BacklogItem";
 import { StatCard } from "./components/StatCard";
 import { ClarityModal } from "./components/ClarityModal";
-
-// Sample data
-const sampleBacklogItems: BacklogItemType[] = [
-  {
-    id: 1,
-    title: "Implement user authentication",
-    devClarity: "clear",
-    businessClarity: "almost clear",
-    validation: "unclear",
-  },
-  {
-    id: 2,
-    title: "Add dashboard analytics",
-    devClarity: "unclear",
-    businessClarity: "clear",
-    validation: "almost clear",
-  },
-  {
-    id: 3,
-    title: "Optimize database queries",
-    devClarity: "almost clear",
-    businessClarity: "unclear",
-    validation: "clear",
-  },
-];
+import { useBacklogIssues } from "./hooks/useBacklogIssues";
 
 function App() {
-  const [backlogItems, setBacklogItems] =
-    useState<BacklogItemType[]>(sampleBacklogItems);
+  const { data: issues, loading, error } = useBacklogIssues();
   const [selectedItem, setSelectedItem] = useState<BacklogItemType | null>(
     null
   );
+
+  // Convert API clarity scores (1-5) to our UI states (unclear, almost clear, clear)
+  const mapClarityScore = (
+    score: number
+  ): "unclear" | "almost clear" | "clear" => {
+    if (score <= 2) return "unclear";
+    if (score <= 4) return "almost clear";
+    return "clear";
+  };
+
+  const backlogItems: BacklogItemType[] =
+    issues?.map((issue) => ({
+      id: issue.id,
+      title: issue.title,
+      devClarity: mapClarityScore(issue.developer_clarity),
+      businessClarity: mapClarityScore(issue.business_value_clarity),
+      validation: mapClarityScore(issue.customer_validation),
+    })) ?? [];
 
   // Define a type for the keys of the stats object
   type ClarityField = "devClarity" | "businessClarity" | "validation";
@@ -59,11 +52,25 @@ function App() {
   );
 
   const handleUpdateClarity = (updatedItem: BacklogItemType) => {
-    setBacklogItems((items) =>
-      items.map((item) => (item.id === updatedItem.id ? updatedItem : item))
-    );
+    // TODO: Implement API update
     setSelectedItem(null);
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-xl">Loading...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-xl text-red-600">Error: {error}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
