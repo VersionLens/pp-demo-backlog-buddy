@@ -1,0 +1,62 @@
+# Django/Python Rules
+
+- Use Django's class-based views for complex logic, function-based views for simple operations
+- Follow MVT (Model-View-Template) pattern strictly
+- Keep business logic in models/forms; views should focus on request handling
+- Use Django's built-in features (auth, forms, validation) over custom solutions
+- Implement proper error handling with try-except blocks
+- Follow PEP 8 compliance for Python code style
+- Use descriptive names with underscores for Python functions/variables
+- Optimize queries using select_related and prefetch_related
+- Utilize Django's caching framework with Redis/Memcached
+- Implement database indexing for performance
+- Use Django signals for decoupled error handling
+- Leverage Django middleware for cross-cutting concerns
+
+# React/Frontend Rules
+
+- Write functional components instead of class components
+- Use TypeScript for all new code; avoid 'any' and 'unknown' types
+- Prefer interfaces over types in TypeScript
+- Use early returns for better code readability
+- Name event handlers with 'handle' prefix (handleClick, handleSubmit)
+- Use named exports for components
+- Keep JSX minimal and readable
+- Implement proper accessibility features (aria-labels, roles)
+- Use constants instead of functions where appropriate
+- Follow mobile-first approach in design
+
+# Tailwind CSS Rules
+
+- Use Tailwind classes for styling; avoid custom CSS
+- Use class: syntax instead of ternary operators for conditional styling
+- Follow responsive design patterns
+- Maintain consistent spacing and sizing using Tailwind's scale
+- Use Tailwind's color palette for consistency
+- Leverage Tailwind's built-in dark mode support
+
+# General Best Practices
+
+- Follow DRY (Don't Repeat Yourself) principle
+- Write self-documenting code with clear variable names
+- Implement proper error boundaries and fallbacks
+- Use environment variables for configuration
+- Write unit tests for critical functionality
+- Optimize for performance and accessibility
+- Use proper Git commit messages and branching
+- Document complex logic and important decisions
+- Maintain consistent code formatting
+- Use semantic versioning for releases
+- Implement proper logging and monitoring
+- Use async/await over promise chains
+
+# Security Guidelines
+
+- Implement CSRF protection
+- Prevent SQL injection
+- Guard against XSS attacks
+- Use proper authentication and authorization
+- Sanitize user inputs
+- Secure API endpoints
+- Follow security best practices for file uploads
+- Implement rate limiting where necessary
