@@ -1,0 +1,102 @@
+# Python/Django
+*.py[cod]
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+bin/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+venv/
+env/
+.env
+.python-version
+*.sqlite3
+media/
+static/
+staticfiles/
+
+# Node/React
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+build/
+dist/
+coverage/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE/Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Testing
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+.mypy_cache/
+
+# Production
+build/
+dist/
+*.min.css
+*.min.js
+
+# Environment variables
+.env*
+!.env.example
+
+# Dependencies
+package-lock.json
+yarn.lock
+
+# Tailwind
+tailwind.output.css
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Local development
+local_settings.py
+db.sqlite3-journal 
