@@ -1,4 +1,4 @@
-import { BacklogIssue } from "./types";
+import { BacklogIssue, LoginCredentials, User } from "./types";
 
 const API_BASE_URL = "http://localhost:8000/api";
 
@@ -10,9 +10,51 @@ class ApiError extends Error {
 }
 
 export class ApiClient {
+  static async login(credentials: LoginCredentials): Promise<User> {
+    const response = await fetch(`${API_BASE_URL}/login`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    });
+
+    if (!response.ok) {
+      throw new ApiError(response.status, "Invalid credentials");
+    }
+
+    return response.json();
+  }
+
+  static async logout(): Promise<void> {
+    const response = await fetch(`${API_BASE_URL}/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      throw new ApiError(response.status, "Failed to logout");
+    }
+  }
+
+  static async getCurrentUser(): Promise<User> {
+    const response = await fetch(`${API_BASE_URL}/me`, {
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      throw new ApiError(response.status, "Not authenticated");
+    }
+
+    return response.json();
+  }
+
   static async getIssues(): Promise<BacklogIssue[]> {
     try {
-      const response = await fetch(`${API_BASE_URL}/issues`);
+      const response = await fetch(`${API_BASE_URL}/issues`, {
+        credentials: "include",
+      });
 
       if (!response.ok) {
         let errorMessage: string;

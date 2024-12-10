@@ -1,5 +1,15 @@
-from ninja import ModelSchema
+from ninja import ModelSchema, Schema
 from .models import BacklogIssue, Team
+
+
+class LoginSchema(Schema):
+    username: str
+    password: str
+
+
+class UserSchema(Schema):
+    id: int
+    username: str
 
 
 class TeamSchema(ModelSchema):
